@@ -41,14 +41,14 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable Long id) {
         return usuarioRepository.findById(id)
-            .map(resposta -> ResponseEntity.ok(resposta))
+            .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
     
     @PostMapping("/logar")
     public ResponseEntity<UsuarioLogin> login(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
         return usuarioService.autenticarUsuario(usuarioLogin)
-            .map(resposta -> ResponseEntity.ok(resposta))
+            .map(ResponseEntity::ok)
             .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
